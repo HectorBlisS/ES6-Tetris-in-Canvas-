@@ -5,19 +5,22 @@ class Board{
         this.init();
     }
     init(){
-        this.ctx.canvas.width = COLS * 30 // cols * blocksize
-        this.ctx.canvas.height = ROWS * 30 // rows * blocksize
+    // Calculate size of canvas from constants.
+        this.ctx.canvas.width = COLS * BLOCK_SIZE;
+        this.ctx.canvas.height = ROWS * BLOCK_SIZE;
+            
         this.grid = this.getEmptyGrid();
+        console.log("grid:", this.grid, this.ctx.canvas.height)
         this.getNewPiece()
     }
     draw(){
         this.piece.draw();
-        this.drawBoard()
+        this.drawBoard();
+
     }
 
     drawBoard(){
         this.fillStyle = 'indigo'
-        this.ctx.strokeRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height);
         this.grid.forEach((row, y)=>{
             row.forEach((value,x)=>{
                 if(value>0){

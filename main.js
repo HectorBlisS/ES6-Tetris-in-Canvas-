@@ -1,13 +1,7 @@
-const canvas = document.createElement("canvas");
-canvas.id="main-canvas"
-const next = document.querySelector('#next');
-const ctxNext = next.getContext('2d')
-const container = document.querySelector(".canvas-container");
-container.appendChild(canvas);
+const canvas = document.querySelector("#main");
+const canvasNext = document.querySelector('#next');
+const ctxNext = canvasNext.getContext('2d')
 const ctx = canvas.getContext("2d");
-console.log("width: ", container.getBoundingClientRect().width)
-canvas.width = container.getBoundingClientRect().width;
-canvas.height = container.getBoundingClientRect().height
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 // instances

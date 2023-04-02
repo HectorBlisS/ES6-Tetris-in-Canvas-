@@ -1,8 +1,6 @@
 class Piece {
     constructor(ctx){
         this.ctx=ctx;
-        this.ctx.canvas.width=180
-        this.ctx.canvas.height=180
         this.spawn();
     }
 
