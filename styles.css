@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    font-family: "Press Start 2P";
+    display: flex;
+    padding: 16px;
+  }
+  
+  .info {
+    flex:1;
+    display: grid;
+  }
+  #main-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .canvas-container {
+    max-width: 300px;
+    background: transparent;
+    /* border:4px solid #323232; */
+    border-radius: 9px;
+    flex: 2;
+    position: relative;
+    height: 600px;
+  }
+  
