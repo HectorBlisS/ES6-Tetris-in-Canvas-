@@ -23,6 +23,8 @@ const getRandomShape = () => {
 }
 
 export const drawPreview = (shape, context=nextCtx) => {
+    // erease first
+    nextCtx.clearRect(0,0,context.canvas.width,context.canvas.height);
     shape.forEach((row,y)=>{
         row.forEach((number,x)=>{
             if(number>0){
@@ -32,10 +34,17 @@ export const drawPreview = (shape, context=nextCtx) => {
     });
 }
 
+// this should be configurable
+const getShapeName = (shape) => {
+    const shapeCopy = [...shape];
+   const totalSum = shapeCopy.flat().reduce((acc,number)=>acc+number,0)
+   return totalSum/4
+}
+
 export const getShape = () =>{
     const shape = getRandomShape();
     drawPreview(shape);
-    return shape
+    return {shape, shapeName:getShapeName(shape)}
 }
 
 
