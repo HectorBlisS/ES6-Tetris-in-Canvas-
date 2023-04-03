@@ -1,9 +1,9 @@
 import {KEY} from './constants.js'
 
-export const moves = {
+export const moves = { // check the others!
     [KEY.LEFT]: (p) => ({ ...p, x: p.x - 1 }),
     [KEY.RIGHT]: (p) => ({ ...p, x: p.x + 1 }),
-    [KEY.DOWN]: (p) => ({ ...p, y: p.y + 1 }),
+    [KEY.DOWN]: (p) => ({ ...p, y: p.y +1 }),
     [KEY.SPACE]: (p) => ({ ...p, y: p.y + 1 }),
     [KEY.UP]: (p) => board.rotate(p, ROTATION.RIGHT),
     [KEY.Q]: (p) => board.rotate(p, ROTATION.LEFT)
@@ -26,13 +26,4 @@ export const moves = {
     if (element) {
       element.textContent = value;
     }
-  }
-  
-
-
-function initNext() {
-    // Calculate size of canvas from constants.
-    ctxNext.canvas.width = 4 * BLOCK_SIZE;
-    ctxNext.canvas.height = 4 * BLOCK_SIZE;
-    ctxNext.scale(BLOCK_SIZE, BLOCK_SIZE);
   }
