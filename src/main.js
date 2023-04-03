@@ -1,5 +1,5 @@
 import { COLS, KEY, LEVEL } from "../constants.js";
-import { freezeGrid, getBoard, setShape } from "./board.js";
+import { freezeGrid, getBoard, setShape, showPause } from "./board.js";
 import { getShape, moveDown } from "./pieces.js";
 
 
@@ -46,6 +46,14 @@ const startGame = () => {
 }
 
 const keyHandlers = {
+    [KEY.P]:()=>{
+        if(!frame) {
+            requestAnimationFrame(animate);
+        }
+        showPause();
+        cancelAnimationFrame(frame);
+        frame=null;
+    },
     [KEY.LEFT]:()=>{
         position.x--; // left
         if(position.x<0){

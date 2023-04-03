@@ -28,6 +28,17 @@ freeze[19][7]=1
 freeze[19][8]=1
 freeze[19][9]=1
 
+export const showPause = ()=>{
+    ctx.fillStyle="black"
+    ctx.fillRect(1.5*BLOCK_SIZE+6,3*BLOCK_SIZE-6, 200,100)
+    ctx.font = "44px Arial";
+    ctx.fillStyle="white"
+    ctx.fillText("PAUSE" ,2.5*BLOCK_SIZE,5*BLOCK_SIZE);
+
+
+
+}
+
 export const freezeGrid=(grid)=>{
     const newFreeze = [...freeze]
     // need to combine current freeze and grid
