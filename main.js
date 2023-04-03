@@ -1,3 +1,6 @@
+import Board from './board.js'
+import { LEVEL } from './constants.js';
+
 const canvas = document.querySelector("#main");
 const canvasNext = document.querySelector('#next');
 const ctxNext = canvasNext.getContext('2d')
@@ -9,42 +12,7 @@ let frames=0
 let requestId;
 let time = null;
 let board = new Board(ctx, ctxNext);
-const moves = {
-    [KEY.LEFT]: (p) => ({ ...p, x: p.x - 1 }),
-    [KEY.RIGHT]: (p) => ({ ...p, x: p.x + 1 }),
-    [KEY.DOWN]: (p) => ({ ...p, y: p.y + 1 }),
-    [KEY.SPACE]: (p) => ({ ...p, y: p.y + 1 }),
-    [KEY.UP]: (p) => board.rotate(p, ROTATION.RIGHT),
-    [KEY.Q]: (p) => board.rotate(p, ROTATION.LEFT)
-  };
-  let accountValues = {
-    score: 0,
-    level: 0,
-    lines: 0
-  };
-  let account = new Proxy(accountValues, {
-    set: (target, key, value) => {
-      target[key] = value;
-      updateAccount(key, value);
-      return true;
-    }
-  });
-  
-  function updateAccount(key, value) {
-    let element = document.getElementById(key);
-    if (element) {
-      element.textContent = value;
-    }
-  }
-  
-
-
-function initNext() {
-    // Calculate size of canvas from constants.
-    ctxNext.canvas.width = 4 * BLOCK_SIZE;
-    ctxNext.canvas.height = 4 * BLOCK_SIZE;
-    ctxNext.scale(BLOCK_SIZE, BLOCK_SIZE);
-  }
+const account ={};
 
   function resetGame() {
     account.score = 0;
@@ -106,14 +74,11 @@ const play = () => {
 // event listeners
 document.querySelector('#play-btn').onclick=()=>{
     if(
-        document.querySelector('#play-btn').textContent === 'Pausar' 
+      document.querySelector('#play-btn').textContent === 'Pausar' 
     ){
-       pause() 
+      pause() 
     }else{
-
-        play();
+      play();
     }
 }
-
-initNext();
 resetGame();

@@ -1,4 +1,8 @@
-class Board{
+import { COLORS, COLS, ROWS, BLOCK_SIZE,KEY } from './constants.js';
+import {moves} from './utils.js'
+import {Piece} from './piece.js'
+
+export default class Board{
     constructor(ctx, ctxNext){
         this.ctx = ctx;
         this.ctxNext = ctxNext;

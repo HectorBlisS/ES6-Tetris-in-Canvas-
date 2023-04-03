@@ -1,8 +1,8 @@
-const COLS = 10;
-const ROWS = 20;
-const BLOCK_SIZE = 30;
-const COLORS = [
-    'none',
+export const COLS = 10;
+export const ROWS = 20;
+export const BLOCK_SIZE = 30;
+export const COLORS = [
+    '#323232',
     'cyan',
     'blue',
     'orange',
@@ -11,7 +11,29 @@ const COLORS = [
     'purple',
     'red'
   ];
-  const SHAPES = [
+  export const SHAPES = 
+    [
+      [
+        [0,0,0,0],
+        [1,1,1,1],
+        [0,0,0,0],
+        [0,0,0,0],
+      ],
+      [
+        [0,0,0,0],
+        [0,0,2,0],
+        [2,2,2,0],
+        [0,0,0,0]
+      ],
+      [
+        [0,0,0,0],
+        [0,0,3,3],
+        [0,3,3,0],
+        [0,0,0,0]
+      ]
+    ]
+  
+export const _SHAPES = [
     [],
     [[0, 0, 0, 0], [1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0]],
     [[2, 0, 0], [2, 2, 2], [0, 0, 0]],
@@ -23,7 +45,7 @@ const COLORS = [
     [[0, 6, 0], [6, 6, 6], [0, 0, 0]],
     [[7, 7, 0], [0, 7, 7], [0, 0, 0]]
   ];
-  const KEY = {
+  export const KEY = {
     ESC: 27,
     SPACE: 32,
     LEFT: 37,
@@ -33,7 +55,7 @@ const COLORS = [
     P: 80,
     Q: 81
   };
-  const LEVEL = {
+export const LEVEL = {
     0: 800,
     1: 720,
     2: 630,
