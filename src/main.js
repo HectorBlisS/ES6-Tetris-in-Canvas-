@@ -23,6 +23,7 @@ const animate = () =>{
     // dropping?
     if(!board.move(frames)){ // this is the main functions (the movement)
         // gameover
+        console.log("Stopped")
         return;
     }
 

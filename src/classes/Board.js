@@ -11,7 +11,7 @@ export class Board{
         this.ctx = ctx;
         this.ctxNext = ctxNext;
         this.grid = getEmptyGrid();
-        this.piece = new Piece(3,1);
+        this.piece = new Piece(3,0);
         this.next = new Piece();
         this.init();
         this.level = options?.level ?? 0
@@ -28,6 +28,10 @@ export class Board{
     }
 
     move(frames){
+        // check if overflow??
+        if(this.grid[0].some((number)=>number>0)){
+            return false
+        }
         // happy path
         if(frames%LEVEL[this.level]!==0) return true; // this could be improved
         const movedPiece = moves[KEY.DOWN](this.piece); // moving
@@ -38,15 +42,25 @@ export class Board{
             // happy path reachs here
             return true;
         }
-        // can't move further freeze, get next ing and get new next
-        // FREEEEZEEEEEEE ?? return false if top
+        // can't move further so, freeze, then set new piece and next
+        this.freeze();
         // CLEAR LINESSSS ??? return true
         this.piece = this.next
         this.piece.ctx = this.ctx;
-        this.piece.setPosition(3,1);
+        this.piece.setPosition(3,0);
         this.next = new Piece();
         // next piece so, it can move:
         return true;
+    }
+
+    freeze(){
+        this.piece.shape.forEach((row,y)=>{
+            row.forEach((number,x)=>{
+                if(number>0){
+                    this.grid[this.piece.y+y][this.piece.x+x] = number
+                }
+            })
+        })
     }
 
     isValid(p){
