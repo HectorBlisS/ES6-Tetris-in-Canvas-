@@ -82,6 +82,7 @@ export const _SHAPES = [
     3:30,
     4:20,
     5:10,
+    6:5,
   }
 
  const _LEVEL = {

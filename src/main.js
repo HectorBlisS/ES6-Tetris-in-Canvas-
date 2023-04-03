@@ -1,5 +1,5 @@
 import { COLS, KEY, LEVEL } from "../constants.js";
-import { freezeGrid, getBoard, setShape, showPause } from "./board.js";
+import { freezeGrid, getBoard, isOverflow, setShape, showGameOver, showPause } from "./board.js";
 import { getShape, moveDown } from "./pieces.js";
 
 
@@ -9,9 +9,9 @@ let nextShape=getShape();
 let shape ={...nextShape}
 let frame;
 let frames = 0;
-let level = LEVEL[5];
+let level = LEVEL[6];
 
-let position = {x:3,y:2}
+let position = {x:3,y:0}
 
 const animate = ()=>{
     frames++;
@@ -23,16 +23,23 @@ const animate = ()=>{
 }
 
 export const setNextOrGameOver = () => {
+    // part2 game over
+    if(isOverflow()){
+        cancelAnimationFrame(frame);
+        showGameOver()
+        return;
+        // show some reset button?
+    }
     // freeze board
     freezeGrid(board.grid);
     //part 1 set Next
-    position = {x:3,y:2}
+    position = {x:3,y:0}
     // se envía y se almacena como current
     shape = {...nextShape}
     setShape(shape, board, position);
     // se actualiza el siguiente
     nextShape=getShape();
-    // part2 game over
+
 }
 
 const startGame = () => {

@@ -28,15 +28,30 @@ freeze[19][7]=1
 freeze[19][8]=1
 freeze[19][9]=1
 
+export const isOverflow = () => {
+    let result = false;
+    freeze[1].forEach((number)=>{
+        if(number>0){
+            result = true
+        }
+    })
+    return result;
+}
+
+export const showGameOver = ()=>{
+    ctx.fillStyle="steelblue"
+    ctx.fillRect(.3*BLOCK_SIZE,3*BLOCK_SIZE-6, 300,100)
+    ctx.font = "44px Arial";
+    ctx.fillStyle="white"
+    ctx.fillText("Game Over" ,BLOCK_SIZE,5*BLOCK_SIZE);
+}
+
 export const showPause = ()=>{
-    ctx.fillStyle="black"
+    ctx.fillStyle="steelblue"
     ctx.fillRect(1.5*BLOCK_SIZE+6,3*BLOCK_SIZE-6, 200,100)
     ctx.font = "44px Arial";
     ctx.fillStyle="white"
     ctx.fillText("PAUSE" ,2.5*BLOCK_SIZE,5*BLOCK_SIZE);
-
-
-
 }
 
 export const freezeGrid=(grid)=>{
