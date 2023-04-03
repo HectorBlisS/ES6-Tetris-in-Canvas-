@@ -16,8 +16,8 @@ export const COLORS = [
     [
       [
         [0,0,0,0],
-        [1,1,1,1],
         [0,0,0,0],
+        [1,1,1,1],
         [0,0,0,0],
       ],
       [
@@ -74,7 +74,17 @@ export const _SHAPES = [
     P: 80,
     Q: 81
   };
-export const LEVEL = {
+
+  export const LEVEL = {
+    0:100,
+    1:80,
+    2:50,
+    3:30,
+    4:20,
+    5:10,
+  }
+
+ const _LEVEL = {
     0: 800,
     1: 720,
     2: 630,

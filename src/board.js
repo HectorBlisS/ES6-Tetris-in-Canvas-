@@ -1,15 +1,64 @@
 import { BLOCK_SIZE, COLORS, COLS, KEY, ROWS, SHAPES } from "../constants.js";
-import { drawBox, drawPreview } from "./nextPiece.js";
+import { setNextOrGameOver } from "./main.js";
+import { drawBox, drawPreview } from "./pieces.js";
 
 const xOffset = 3;
 const yOffset = 2;
+let grid = Array.from({length:ROWS},()=>{
+    return Array.from({length:COLS},()=>0);
+});
 
 const canvas = document.querySelector('#main');
 const ctx = canvas.getContext('2d');
 canvas.width = COLS*BLOCK_SIZE;
 canvas.height = ROWS*BLOCK_SIZE;
 
-const drawGrid = (grid) => { // need two cicles to overdraw
+export const getEmptyGrid = () => Array.from({length:ROWS},()=>{
+    return Array.from({length:COLS},()=>0);
+});
+let freeze = getEmptyGrid();
+freeze[19][0]=1
+freeze[19][1]=1
+freeze[19][2]=1
+freeze[19][3]=1
+freeze[19][4]=1
+freeze[19][5]=1
+freeze[19][6]=1
+freeze[19][7]=1
+freeze[19][8]=1
+freeze[19][9]=1
+
+export const freezeGrid=(grid)=>{
+    const newFreeze = [...freeze]
+    // need to combine current freeze and grid
+    grid.forEach((row,y)=>{
+        row.forEach((number,x)=>{
+            if(number>0){
+                newFreeze[y][x] = number;
+            }
+        })  
+    })
+    freeze = [...newFreeze];
+}
+
+export const checkIfFreeze = (position,shape) => {
+    let result = false;
+        shape.shape.forEach((row,y)=>{
+            row.forEach((number,x)=>{
+// necesitamos verificar debajo solamente de los numeros no de los ceros            
+                if(number>0){
+                    if(freeze[position.y+y][position.x+x]>0){
+                        // coliition
+                        result = true
+                    }
+                }
+         
+            })
+        })
+        return result;
+}
+
+export const drawGrid = (grid) => { // need two cicles to overdraw
     // draw grid
     grid.forEach((row,y)=>{
         row.forEach((number, x)=>{
@@ -18,6 +67,7 @@ const drawGrid = (grid) => { // need two cicles to overdraw
             }
         })
     });
+
     // draw shape
     grid.forEach((row,y)=>{
         row.forEach((number, x)=>{
@@ -25,32 +75,44 @@ const drawGrid = (grid) => { // need two cicles to overdraw
                 drawBox(x,y,number, ctx);
             }
         })
-    })
+    });
+        // draw freeze
+        freeze.forEach((row,y)=>{
+            row.forEach((number,x)=>{
+                if(number<1)return;
+                drawBox(x,y,number,ctx)
+            })
+        })
+
 }
 
+
 const getGrid = () =>{
-    const grid = Array.from({length:ROWS},()=>{
-        return Array.from({length:COLS},()=>0);
-    });
     drawGrid(grid);
     return grid; 
 }
 
 export const setShape = (shape, board,position)=> {
-    console.log("SHAPE? ", shape)
     // new grid
-    board.grid =  getGrid()
+    board.grid = getEmptyGrid()
     // what if square? @TODO==============================
+    const newPrint = getEmptyGrid();
     shape.shape.forEach((row,y)=>{
         row.forEach((number,x)=>{
-            if(number>0) {
-                board.grid[position.y+y][position.x+x] = number;
-            }
+            newPrint[position.y+y][position.x+x] = number;
         })
-    })
-
+    });
+    board.grid = newPrint;
     drawGrid(board.grid);
 
+}
+
+export const deleteShape = (board,shape,position) => {
+    shape.shape.forEach((row,y)=>{
+        row.forEach((_,x)=>{
+            board.grid[position.y+y][position.x+x] = 0;
+        })
+    })
 }
 
 export const getBoard = () => ({
